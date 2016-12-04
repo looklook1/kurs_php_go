@@ -1,6 +1,5 @@
 <?php
     require 'config.inc';
- 
     include 'lib/function.inc';
     require 'lib/db_connect.inc';
     require 'lib/aktualnosci.inc';
