@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-function fetchAllNews( $connectDB, $sort = "DESC") { // wyswietlanie wszystkich aktualnosci
+function fetchAllNews( $connectDB, $sort = "DESC" ) { // wyswietlanie wszystkich aktualnosci
     $arrayNews = array();
     
     if ($sort == null or ($sort != 'ASC' and $sort != 'DESC')) {
@@ -27,7 +27,7 @@ function fetchAllNews( $connectDB, $sort = "DESC") { // wyswietlanie wszystkich 
     }
 } // koniec funkcji
 
-function getOneNew( $connectDB, $idNew) {
+function getOneNew( $connectDB, $idNew ) {
     $sqlQuery = "SELECT * FROM t_aktualnosci WHERE id_aktualnosci = $idNew";
     $sqlResult = mysqli_query($connectDB, $sqlQuery);
     
@@ -48,3 +48,15 @@ function addNew( $connectDB, $dataFormNew ) { // dodawnie nowej aktualnosci
             . "NOW())";
     mysqli_query($connectDB, $sqlQuery);
 } // koniec funkcji
+
+function saveNew( $connectDB, $dataFormNew ) {
+    $dataNow = date("Y-m-d H:i:s");
+    
+    $sqlQuery = "UPDATE t_aktualnosci SET "
+            . "tytul_aktualnosci = '".$dataFormNew["tytul_aktualnosci"]."', "
+            . "naglowek_aktualnosci = '".$dataFormNew["naglowek_aktualnosci"]."', "
+            . "data_publikacji_aktualnosci = '".$dataNow."' "
+            . "WHERE id_aktualnosci = ".$dataFormNew["id_new"];
+                
+    mysqli_query( $connectDB, $sqlQuery );
+}

@@ -11,8 +11,8 @@
     
     $connectDB = connectDB(__HOST__, __UNAME__, __PASSWD__, __DB_NAME__, __DB_CHARSET_SET__);
 
-    if($_GET["action"] == "add_new") {
-        addNew($connectDB, $_POST);
+    if($_GET["action"] == "save_new") {
+        saveNew($connectDB, $_POST);
     }
     
     $oneNew = getOneNew($connectDB, $_GET["id_new"]);
@@ -39,11 +39,14 @@ and open the template in the editor.
         </section>
         
         <h3>Edycja aktualności</h3>
-        <form action="index.php?action=add_new" method="post">
+        <form action="edit_new.php?action=save_new&id_new=<?=$oneNew["id_aktualnosci"];?>" method="post">
+            <input type="hidden" name="id_new" value="<?=$oneNew["id_aktualnosci"];?>">
             Tytuł aktualności<br>
             <input value="<?=$oneNew["tytul_aktualnosci"];?>" style="width: 450px;" type="text" name="tytul_aktualnosci" min="1" maxlength="255" required="required"><br>
             Nagłówek aktualności<br>
-            <textarea style="width: 450px;" name="naglowek_aktualnosci" cols="75" rows="5" required="required"><?=$oneNew["naglowek_aktualnosci"];?></textarea><br>
+            <textarea style="width: 450px;" name="naglowek_aktualnosci" cols="75" rows="5" required="required">
+                <?=$oneNew["naglowek_aktualnosci"];?>
+            </textarea><br>
             <button type="submit" value="Zapisz aktualność">Zapisz aktualność</button>
         </form>
     </body>

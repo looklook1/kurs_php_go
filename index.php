@@ -81,6 +81,7 @@ and open the template in the editor.
                 <p id="header"><?=$oneNew["naglowek_aktualnosci"];?></p>
                 <span id="data"><?=$oneNew["data_publikacji_aktualnosci"];?></span>
             </article>
+            <p><a href="">USUŃ</a> | <a href="edit_new.php?id_new=<?=$oneNew["id_aktualnosci"];?>">EDYTUJ</a></p>
             <hr>
         <?php endforeach; ?>
             
