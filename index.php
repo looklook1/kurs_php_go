@@ -12,7 +12,7 @@
     $connectDB = connectDB(__HOST__, __UNAME__, __PASSWD__, __DB_NAME__, __DB_CHARSET_SET__);
 
     if($_GET["action"] == "add_new") {
-        addNew($connectDB);
+        addNew($connectDB, $_POST);
     }
 ?>
 

@@ -27,9 +27,24 @@ function fetchAllNews( $connectDB, $sort = "DESC") { // wyswietlanie wszystkich 
     }
 } // koniec funkcji
 
-function addNew( $connectDB ) { // dodawnie nowej aktualnosci
-    $sqlQuery = "INSERT INTO t_aktualnosci(tytul_aktualnosci, naglowek_aktualnosci, data_publikacji_aktualnosci) "
-            . "VALUES ('Czym jest Lorem Ipsum?','Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. ',NOW())";
+function getOneNew( $connectDB, $idNew) {
+    $sqlQuery = "SELECT * FROM t_aktualnosci WHERE id_aktualnosci = $idNew";
+    $sqlResult = mysqli_query($connectDB, $sqlQuery);
     
+    $numRows = mysqli_num_rows($sqlResult);
+    
+    if($numRows > 0) {
+        return mysqli_fetch_assoc($sqlResult);
+    } else {
+        return 0; //brak aktualnosci
+    }
+} // koniec funkcji
+
+function addNew( $connectDB, $dataFormNew ) { // dodawnie nowej aktualnosci
+    $sqlQuery = "INSERT INTO t_aktualnosci(tytul_aktualnosci, naglowek_aktualnosci, data_publikacji_aktualnosci) "
+            . "VALUES ('"
+            .$dataFormNew['tytul_aktualnosci']."','"
+            .$dataFormNew['naglowek_aktualnosci']."',"
+            . "NOW())";
     mysqli_query($connectDB, $sqlQuery);
 } // koniec funkcji
